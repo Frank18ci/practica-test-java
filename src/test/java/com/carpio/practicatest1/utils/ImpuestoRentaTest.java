@@ -1,0 +1,55 @@
+package com.carpio.practicatest1.utils;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ImpuestoRentaTest {
+    @Test
+    public void tasa0True() {
+        ImpuestoRenta c = new ImpuestoRenta(4000);
+        Double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        System.out.println("Tasa 0%: " + iR);
+        assertTrue(c.calcularImpuesto() == 0.00);
+    }
+
+    @Test
+    public void tasa0False() {
+        ImpuestoRenta c = new ImpuestoRenta(4000);
+        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        System.out.println("Tasa 0%: " + iR);
+        assertFalse(c.calcularImpuesto() != 0.00);
+    }
+
+    @Test
+    public void tasa0Equals() {
+        ImpuestoRenta c = new ImpuestoRenta(4000);
+        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        System.out.println("Tasa 0%: " + iR);
+        assertEquals(c.calcularImpuesto(), 0.00);
+    }
+
+    @Test
+    public void tasa8True() {
+        ImpuestoRenta c = new ImpuestoRenta(30000);
+        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        System.out.println("Tasa 8%: " + iR);
+        assertTrue(c.calcularImpuesto() == 188.00);
+    }
+
+    @Test
+    public void tasa8False() {
+        ImpuestoRenta c = new ImpuestoRenta(30000);
+        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        System.out.println("Tasa 8%: " + iR);
+        assertFalse(c.calcularImpuesto() != 188.00);
+    }
+
+    @Test
+    public void tasa8Equals() {
+        ImpuestoRenta c = new ImpuestoRenta(30000);
+        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        System.out.println("Tasa 8%: " + iR);
+        assertEquals(c.calcularImpuesto(), 188.00);
+    }
+}
