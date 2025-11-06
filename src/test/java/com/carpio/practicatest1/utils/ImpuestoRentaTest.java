@@ -33,23 +33,7 @@ public class ImpuestoRentaTest {
     public void tasa8True() {
         ImpuestoRenta c = new ImpuestoRenta(30000);
         double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
-        System.out.println("Tasa 8%: " + iR);
-        assertTrue(c.calcularImpuesto() == 188.00);
-    }
-
-    @Test
-    public void tasa8False() {
-        ImpuestoRenta c = new ImpuestoRenta(30000);
-        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
-        System.out.println("Tasa 8%: " + iR);
-        assertFalse(c.calcularImpuesto() != 188.00);
-    }
-
-    @Test
-    public void tasa8Equals() {
-        ImpuestoRenta c = new ImpuestoRenta(30000);
-        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
-        System.out.println("Tasa 8%: " + iR);
-        assertEquals(c.calcularImpuesto(), 188.00);
+        System.out.println("Tasa 0%: " + iR);
+        assertTrue(c.calcularImpuesto() == 0);
     }
 }

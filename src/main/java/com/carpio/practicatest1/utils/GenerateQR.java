@@ -64,17 +64,17 @@ public class GenerateQR {
 
     // Ejemplo sencillo: guarda el SVG en un fichero
     public static void main(String[] args) throws Exception {
-        String link = args.length > 0 ? args[0] : "https://iglesiavisiondefe.org/";
+        String link = args.length > 0 ? args[0] : "https://www.facebook.com/share/1BpogPbeA8/";
         String svg = generateSvg(link,
                 6,                       // moduleSize en px
                 4,                       // margin en módulos
                 ErrorCorrectionLevel.M,  // nivel de corrección
                 "#000000",               // color oscuro
                 "#FFFFFF");              // color claro
-
-        try (FileWriter fw = new FileWriter("qrcode.svg")) {
+        final String nameFile = "facebook.svg";
+        try (FileWriter fw = new FileWriter(nameFile)) {
             fw.write(svg);
         }
-        System.out.println("SVG generado en qrcode.svg");
+        System.out.println("SVG generado en " + nameFile);
     }
 }
