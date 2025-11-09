@@ -8,9 +8,9 @@ public class ImpuestoRentaTest {
     @Test
     public void tasa0True() {
         ImpuestoRenta c = new ImpuestoRenta(4000);
-        Double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
+        double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
         System.out.println("Tasa 0%: " + iR);
-        assertTrue(c.calcularImpuesto() == 0.00);
+        assertEquals(0.00, c.calcularImpuesto());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ImpuestoRentaTest {
         ImpuestoRenta c = new ImpuestoRenta(4000);
         double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
         System.out.println("Tasa 0%: " + iR);
-        assertEquals(c.calcularImpuesto(), 0.00);
+        assertEquals(0.00, c.calcularImpuesto());
     }
 
     @Test
@@ -34,6 +34,6 @@ public class ImpuestoRentaTest {
         ImpuestoRenta c = new ImpuestoRenta(30000);
         double iR = Math.rint(c.calcularImpuesto() * 100) / 100;
         System.out.println("Tasa 0%: " + iR);
-        assertTrue(c.calcularImpuesto() == 0);
+        assertEquals(0, (double) c.calcularImpuesto());
     }
 }

@@ -9,8 +9,4 @@ class GenerateQRTest {
     @Test
     void generateSvg() {
     }
-
-    @Test
-    void main() {
-    }
 }
