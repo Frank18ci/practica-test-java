@@ -7,40 +7,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.Arrays;
 import java.util.List;
 
+
+import static com.carpio.practicatest1.utils.TestExpectations.expectAllListOfClassAt;
+import static com.carpio.practicatest1.utils.TestUtils.getResource;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
-public class ProductControllerTest {
+class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockitoBean
     private ProductService productService;
 
+    private static final String LIST_SUCCESSFULLY_JSON = "list_successfully.json";
+
     @Test
-    void ReturnAllProductsSuccessfullyTest() throws Exception {
-        List<Product> mockProducts = List.of(
-                Product.builder().id(1L).name("Laptop").price(1206.0).quantity(5).category("Computer").build(),
-                Product.builder().id(2L).name("Mouse").price(20.0).quantity(15).category("Accessories").build(),
-                Product.builder().id(3L).name("Keyboard").price(45.0).quantity(10).category("Accessories").build(),
-                Product.builder().id(4L).name("PC").price(5500.0).quantity(20).category("Computer").build()
-        );
+    void returnAllProductsSuccessfully() throws Exception {
+        final Product[] mockProductsArray = getResource(LIST_SUCCESSFULLY_JSON, Product[].class, this.getClass());
+
+        final List<Product> mockProducts = Arrays.asList(mockProductsArray);
 
         when(productService.findAll()).thenReturn(mockProducts);
 
-        mockMvc.perform(get("/api/products"))
+        ResultActions actions = mockMvc.perform(get("/api/products"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(mockProducts.size()))
-                .andExpect(jsonPath("$[0].id").value(mockProducts.getFirst().getId()))
-                .andExpect(jsonPath("$[0].name").value(mockProducts.getFirst().getName()))
-                .andExpect(jsonPath("$[0].price").value(mockProducts.getFirst().getPrice()))
-                .andExpect(jsonPath("$[0].quantity").value(mockProducts.getFirst().getQuantity()))
-                .andExpect(jsonPath("$[0].category").value(mockProducts.getFirst().getCategory()));
+                .andExpect(jsonPath("$.length()").value(mockProducts.size()));
+        expectAllListOfClassAt(actions, mockProducts);
     }
+
 }
