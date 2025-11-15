@@ -68,24 +68,25 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/api/products/{id}", productId))
                 .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.message").value("Product not found with id: " + productId));
+                .andExpect(jsonPath("$").value("Product not found with id: " + productId));
     }
 
     @Test
     void returnSaveProductSuccessfully() throws Exception {
+        final Product expectedMockProduct = getResource("expected_product_save_successfully.json", Product.class, this.getClass());
         final Product mockProduct = getResource("product_save_successfully.json", Product.class, this.getClass());
 
-        when(productService.save(mockProduct)).thenReturn(mockProduct);
+        when(productService.save(mockProduct)).thenReturn(expectedMockProduct);
 
         mockMvc.perform(post("/api/products")
                 .contentType("application/json")
                 .content("{\"name\":\"Tablet\",\"price\":300.0,\"quantity\":8,\"category\":\"Electronics\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(mockProduct.getId()))
-                .andExpect(jsonPath("$.name").value(mockProduct.getName()))
-                .andExpect(jsonPath("$.price").value(mockProduct.getPrice()))
-                .andExpect(jsonPath("$.quantity").value(mockProduct.getQuantity()))
-                .andExpect(jsonPath("$.category").value(mockProduct.getCategory()));
+                .andExpect(jsonPath("$.id").value(expectedMockProduct.getId()))
+                .andExpect(jsonPath("$.name").value(expectedMockProduct.getName()))
+                .andExpect(jsonPath("$.price").value(expectedMockProduct.getPrice()))
+                .andExpect(jsonPath("$.quantity").value(expectedMockProduct.getQuantity()))
+                .andExpect(jsonPath("$.category").value(expectedMockProduct.getCategory()));
     }
 
 }
