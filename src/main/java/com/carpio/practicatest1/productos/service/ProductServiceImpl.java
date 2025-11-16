@@ -49,7 +49,7 @@ public class ProductServiceImpl implements  ProductService {
         if(name.isBlank()) {
             throw new RuntimeException("Name cannot be blank");
         }
-        if(name.contains("~!@#$%^&*()_+-=")) {
+        if (name.matches(".*[~!@#$%^&*()_+\\-=].*")) {
             throw new RuntimeException("Name contains invalid characters");
         }
         return this.productRepository.findByNameLike(name);

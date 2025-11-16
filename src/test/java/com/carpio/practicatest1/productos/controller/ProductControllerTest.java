@@ -28,7 +28,7 @@ class ProductControllerTest {
     @MockitoBean
     private ProductService productService;
 
-    private static final String LIST_SUCCESSFULLY_JSON = "list_successfully.json";
+    private static final String LIST_SUCCESSFULLY_JSON = "com/carpio/practicatest1/productos/controller/list_successfully.json";
 
     @Test
     void returnAllProductsSuccessfully() throws Exception {
@@ -47,7 +47,7 @@ class ProductControllerTest {
     @Test
     void returnProductByIdSuccessfully() throws Exception {
         final Long productId = 1L;
-        final Product mockProduct = getResource("product_by_id_successfully.json", Product.class, this.getClass());
+        final Product mockProduct = getResource("com/carpio/practicatest1/productos/controller/product_by_id_successfully.json", Product.class, this.getClass());
 
         when(productService.findById(productId)).thenReturn(mockProduct);
 
@@ -73,8 +73,8 @@ class ProductControllerTest {
 
     @Test
     void returnSaveProductSuccessfully() throws Exception {
-        final Product expectedMockProduct = getResource("expected_product_save_successfully.json", Product.class, this.getClass());
-        final Product mockProduct = getResource("product_save_successfully.json", Product.class, this.getClass());
+        final Product expectedMockProduct = getResource("com/carpio/practicatest1/productos/controller/expected_product_save_successfully.json", Product.class, this.getClass());
+        final Product mockProduct = getResource("com/carpio/practicatest1/productos/controller/product_save_successfully.json", Product.class, this.getClass());
 
         when(productService.save(mockProduct)).thenReturn(expectedMockProduct);
 
